@@ -1,0 +1,21 @@
+.app__inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.app__aside {
+    align-self: self-start;
+    max-width: 393px;
+    width: 100%;
+}
+
+.app__main {
+    max-width: 908px;
+    width: 100%;
+}
+
+.app__main-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}

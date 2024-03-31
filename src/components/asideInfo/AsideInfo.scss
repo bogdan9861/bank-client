@@ -1,0 +1,51 @@
+.asideInfo {
+
+    background-color: #fff;
+    border-radius: 20px;
+
+    height: 240px;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        padding: 44px 27px;
+    }
+
+    &__img {
+        align-self: flex-start;
+    }
+
+    &__content {
+        margin-left: 12px;
+    }
+
+    // .asideInfo__text
+
+    &__text {
+        font-size: 15px;
+        margin-bottom: 13px;
+        font-weight: 300;
+    }
+
+    // .asideInfo__link
+
+    &__link {
+        font-size: 15px;
+        border-bottom: 1px solid #6E468F;
+        padding-bottom: 6px;
+        padding-right: 26px;
+
+        position: relative;
+
+        &::after{
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 0;
+
+            width: 10px;
+            height: 10px;
+            background-image: url('../../assets/images/icons/long-arrow.svg');
+        }
+    }
+}
