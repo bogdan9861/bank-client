@@ -1,81 +1,81 @@
 .balance {
-    align-self: self-start;
+  background-color: #fff;
+  border-radius: 20px;
 
-    background-color: #fff;
-    border-radius: 20px;
+  max-width: 100%;
+  width: 100%;
+  margin-right: 25px;
 
-    max-width: 480px;
+  // .balance__inner
 
-    // .balance__inner
+  &__inner {
+    padding: 25px 30px;
+  }
 
-    &__inner {
-        padding: 25px 30px;
+  // .balance__title
+
+  &__title {
+    font-size: 19px;
+    padding-bottom: 20px;
+    display: block;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  // .balance__text
+
+  &__text {
+    font-size: 55px;
+    font-weight: 500;
+    padding-bottom: 20px;
+  }
+
+  // .balance__text-curency
+
+  &__text-currency {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.47);
+  }
+
+  // .balance__btn
+
+  &__btns {
+    display: flex;
+    gap: 0 20px;
+  }
+
+  &__btn {
+    background-color: #fef2f1;
+    width: 130px;
+    border-radius: 23px;
+    padding: 15px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+
+    transition: 0.3s all;
+
+    &-img {
+      margin-left: 20px;
     }
 
-    // .balance__title
-
-    &__title {
-        font-size: 19px;
-        padding-bottom: 20px;
-        display: block;
-        color: rgba(0, 0, 0, .6);
+    &:hover {
+      background-color: #6e468f;
+      color: #fff;
+      transition: 0.3s all;
     }
 
-    // .balance__text
-
-    &__text {
-        font-size: 55px;
-        font-weight: 500;
-        padding-bottom: 20px;
+    &:hover .balance__btn-img path {
+      fill: #fff;
     }
+  }
 
-    // .balance__text-curency
+  &__btn-wrapper {
+    display: flex;
 
-    &__text-currency {
-        font-size: 20px;
-        color: rgba(0, 0, 0, .47);
-    }
-
-    // .balance__btn
-
-    &__btns {
-        display: flex;
-        gap: 0 20px;
-    }
-
-    &__btn {
-        background-color: #fef2f1;
-        width: 130px;
-        border-radius: 23px;
-        padding: 15px 0;
-
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 15px;
-
-        transition: .3s all;
-
-        &-img {
-            margin-left: 20px;
-        }
-
-        &:hover {
-            background-color: #6e468f;
-            color: #fff;
-            transition: .3s all;
-        }
-
-        &:hover .balance__btn-img path {
-            fill: #fff;
-        }
-    }
-
-    &__btn-wrapper {
-        display: flex;
-
-        position: relative;
-    }
+    position: relative;
+  }
 }
+

@@ -3,7 +3,6 @@ import './assets/styles/App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Main from './pages/Main/Main';
-import SignIn from './components/SignIn/SignIn';
 
 function App() {
 
