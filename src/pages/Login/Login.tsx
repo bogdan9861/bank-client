@@ -35,7 +35,6 @@ const Login = () => {
     <Row align="middle" justify="center" style={{ height: "100vh" }}>
       <Card title="Войдите" style={{ width: "30rem" }}>
         <Form onFinish={login}>
-          <CustomInput name="name" placeholder="Введите имя" type="text" />
           <CustomInput
             name="phoneNumber"
             placeholder="Введите номер телефона"

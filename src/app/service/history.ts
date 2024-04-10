@@ -1,6 +1,6 @@
 import { api } from "./api";
 
-type History = {
+export interface History {
   id: string;
   sender: string;
   recipient: string;
@@ -8,7 +8,7 @@ type History = {
   date: string;
   time: string;
   sum: string;
-};
+}
 
 export const historyApi = api.injectEndpoints({
   endpoints: (builder) => ({

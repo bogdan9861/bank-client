@@ -1,11 +1,7 @@
-import React, { useRef, useState, useMemo, useEffect } from "react";
-import {
-  transaction,
-  useGetCardQuery,
-  useTopUpMutation,
-  useTransactionMutation,
-} from "../../app/service/cards";
+import React, { useState, useEffect } from "react";
+import { useGetCardQuery, useTopUpMutation } from "../../app/service/cards";
 
+import SendForm from "../sendForm/SendForm";
 import { Button, Form, Modal, notification } from "antd";
 import { ArrowUpOutlined, PlusOutlined } from "@ant-design/icons";
 import CustomButton from "../../components/customButton/CustomButton";
@@ -22,16 +18,14 @@ type Notification = {
 };
 
 const Balance = () => {
-  const [doTransaction] = useTransactionMutation();
-  const [doTopUp] = useTopUpMutation();
-
-  const [api, contextHolder] = notification.useNotification();
   const { data, isLoading } = useGetCardQuery();
-
   const card = useSelector(SelectCard);
 
   const [oppenModalSend, setOppenModalSend] = useState<boolean>(false);
   const [oppenModalTopUp, setOppenModalTopUp] = useState<boolean>(false);
+
+  const [doTopUp] = useTopUpMutation();
+  const [api, contextHolder] = notification.useNotification();
 
   if (isLoading) {
     return <Loader />;
@@ -41,29 +35,16 @@ const Balance = () => {
     api.open({
       message: "Уведомление",
       placement: "topLeft",
-      description: description,
+      description,
       duration,
     });
-  };
-
-  const transaction = async (data) => {
-    try {
-      await doTransaction(data).unwrap();
-      openNotification({
-        description: "Перевод успешно выполнен.",
-        duration: 3,
-      });
-    } catch (error) {
-      openNotification({
-        description: `${error.data.message || error}`,
-        duration: 10,
-      });
-    }
   };
 
   const topUp = async (data) => {
     try {
       await doTopUp(data).unwrap();
+      setOppenModalTopUp(false);
+
       openNotification({
         description: "Вы успешно пополнили балас",
         duration: 3,
@@ -114,24 +95,7 @@ const Balance = () => {
         onCancel={() => setOppenModalSend(false)}
         title="Перевод по номеру телефона"
       >
-        <Form onFinish={transaction}>
-          <CustomInput placeholder="телефон" name="phoneNumber" />
-          <CustomInput placeholder="сумма" name="sum" />
-          <CustomInput
-            placeholder="причина (не обязательно)"
-            name="reason"
-            required={false}
-          />
-
-          <CustomButton
-            className="custom-andt-btn"
-            htmlType="submit"
-            type="primary"
-            onClick={() => setOppenModalSend(false)}
-          >
-            Отправить
-          </CustomButton>
-        </Form>
+        <SendForm setModalOppen={setOppenModalSend} />
       </Modal>
 
       <Modal
@@ -146,7 +110,6 @@ const Balance = () => {
             className="custom-andt-btn"
             htmlType="submit"
             type="primary"
-            onClick={() => setOppenModalTopUp(false)}
           >
             Отправить
           </CustomButton>

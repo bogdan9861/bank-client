@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { UseDispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../features/AuthSlice";
+import { remove } from "../../features/cardSlice";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/content/logo.png";
 import profileBlank from "../../assets/images/content/profileBlank.png";
@@ -15,6 +17,7 @@ const Header = () => {
   const { isLoading, data } = useCurrentQuery();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <Loader />;
@@ -22,7 +25,9 @@ const Header = () => {
 
   const onExit = () => {
     dispatch(logout());
+    dispatch(remove());
     localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (

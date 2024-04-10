@@ -1,147 +1,157 @@
 .cardOptions {
+  background-color: #fff;
+  padding: 20px 27px 30px 34px;
+  border-radius: 20px;
 
-    background-color: #fff;
-    padding: 20px 27px 30px 34px;
-    border-radius: 20px;
+  margin-bottom: 20px;
 
-    margin-bottom: 20px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 17px;
+  }
 
-    &__top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 17px;
-    }
+  // .cardOptions__top-link
 
-    // .cardOptions__top-link
+  &__top-link {
+    color: #6e468f;
+    font-weight: 500;
+  }
 
-    &__top-link {
-        color: #6e468f;
-        font-weight: 500;
-    }
+  // .cardOptions__card
 
-    // .cardOptions__card
+  &__card {
+    background-image: url("../../assets/images/icons/card-bg.svg");
+    background-repeat: no-repeat;
 
-    &__card {
-        background-image: url('../../assets/images/icons/card-bg.svg');
-        background-repeat: no-repeat;
+    width: 326px;
+    height: 168px;
 
-        width: 326px;
-        height: 168px;
+    color: #fff;
 
-        color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    gap: 0 10%;
+    padding: 34px;
+    margin: 0 auto 33px auto;
+  }
 
-        gap: 0 25%;
-        margin: 0 auto 33px auto;
-    }
+  // .cardOptions__card-inner
 
-    // .cardOptions__card-inner
+  &__card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 63px;
+  }
 
-    &__card-inner {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 63px;
-    }
+  // .cardOptions__card-name
 
-    // .cardOptions__card-name
+  &__card-name {
+    font-weight: 500;
+    font-size: 20px;
+  }
 
-    &__card-name {
-        font-weight: 500;
-    }
+  // .cardOptions__card-number
 
-    // .cardOptions__card-number
+  &__card-number {
+    letter-spacing: 0.2em;
+    font-weight: 300;
+    font-size: 13px;
+  }
 
-    &__card-number {
-        letter-spacing: 3px;
-    }
+  &__card-cvv{
+    background-color: #242424;
+    padding: 4px 10px;
+    border-radius: 18px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+  }
 
-    &__btns {
-        display: flex;
-        justify-content: space-between;
-    }
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__btn {
-        width: 143px;
-        padding: 15px 0;
-        text-align: center;
-        border-radius: 34px;
-    }
+  &__btn {
+    width: 143px;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 34px;
+    font-size: 13px;
+  }
 }
 
 .links-list {
+  // .links-list__item
+  width: 100%;
 
-    // .links-list__item
-    width: 100%;
+  &__item {
+    margin-bottom: 33px;
 
-    &__item {
-        margin-bottom: 33px;
+    position: relative;
+    padding-left: 65px;
+  }
 
-        position: relative;
-        padding-left: 65px;
-    }
+  // .links-list__link
 
-    // .links-list__link
+  &__link {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__link {
-        display: flex;
-        justify-content: space-between;
-    }
+  // .links-list__item-text
 
-
-    // .links-list__item-text
-
-    &__item-text {
-        margin-left: 21px;
-    }
+  &__item-text {
+    margin-left: 21px;
+  }
 }
 
 .add-btn {
-    background-color: #6E468F;
-    color: #fff;
+  background-color: #6e468f;
+  color: #fff;
 }
 
 .remove-btn {
-    background-color: #be3e33;
-    color: #fff;
+  background-color: #be3e33;
+  color: #fff;
 }
 
 .card-ico::before,
 .key-ico::before,
 .lock-ico::before,
 .edit-ico::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 0;
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
 
-    width: 45px;
-    height: 45px;
+  width: 45px;
+  height: 45px;
 
-    border-radius: 100%;
+  border-radius: 100%;
 
-    background-color: #f5f5f5;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-
+  background-color: #f5f5f5;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
 .card-ico::before {
-    background-image: url('../../assets/images/icons/credit-card.svg');
+  background-image: url("../../assets/images/icons/credit-card.svg");
 }
 
 .key-ico::before {
-    background-image: url('../../assets/images/icons/key.svg');
+  background-image: url("../../assets/images/icons/key.svg");
 }
 
 .lock-ico::before {
-    background-image: url('../../assets/images/icons/door-lock.svg');
+  background-image: url("../../assets/images/icons/door-lock.svg");
 }
 
 .edit-ico::before {
-    background-image: url('../../assets/images/icons/range-edit.svg');
+  background-image: url("../../assets/images/icons/range-edit.svg");
 }

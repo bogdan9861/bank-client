@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Divider, Modal, Space } from "antd";
 
-import "./CardOptions.scss";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/AuthSlice";
+import { SelectCard } from "../../features/cardSlice";
+import { splitOnSpaces } from "../../utils/splitOnSpaces";
+import CustomButton from "../customButton/CustomButton";
+import Loader from "../loader/Loader";
+
 import "../../assets/styles/index.css";
+import "./CardOptions.scss";
 
 import mastercard from "../../assets/images/icons/mastercard.svg";
 import shortArrow from "../../assets/images/icons/short-arrow.svg";
@@ -10,13 +18,6 @@ import {
   useGetCardQuery,
   useRemoveCardMutation,
 } from "../../app/service/cards";
-import Loader from "../loader/Loader";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../features/AuthSlice";
-import CustomInput from "../customInput/CustomInput";
-import { Divider, Form, Modal, Row, Space } from "antd";
-import CustomButton from "../customButton/CustomButton";
-import { SelectCard } from "../../features/cardSlice";
 
 const CardOptions = () => {
   const { isLoading, data } = useGetCardQuery();
@@ -27,6 +28,7 @@ const CardOptions = () => {
 
   const [oppenModalAdd, setOppenModalAdd] = useState(false);
   const [oppenModalRemove, setOppenModalRemove] = useState(false);
+  const [cvvVisableable, setCvvVisable] = useState(false);
 
   if (isLoading) {
     return <Loader />;
@@ -64,12 +66,20 @@ const CardOptions = () => {
       <div className="cardOptions__card">
         <div className="cardOptions__card-inner">
           <span className="cardOptions__card-name">{user?.name}</span>
-          <span className="cardOptions__card-number">{card?.code}</span>
-        </div>
-        <div className="cardOptions__card-inner">
           <img className="cardOptions__card-logo" src={mastercard}></img>
+        </div>
+
+        <div className="cardOptions__card-inner">
+          <span className="cardOptions__card-number">
+            {splitOnSpaces(card?.code || "")}
+          </span>
           <div className="cardOptions__card-cvv">
-            <span className="cardOptions__card-cvv__text">{card?.cvv}</span>
+            <button
+              className="cardOptions__card-cvv__text"
+              onClick={() => setCvvVisable(!cvvVisableable)}
+            >
+              {(cvvVisableable && card?.cvv) || "cvv"}
+            </button>
           </div>
         </div>
       </div>
@@ -104,6 +114,7 @@ const CardOptions = () => {
         <button
           className="cardOptions__btn remove-btn"
           onClick={() => setOppenModalRemove(true)}
+          style={{ display: data ? "block" : "none" }}
         >
           Remove <span>-</span>
         </button>

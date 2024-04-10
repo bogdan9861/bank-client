@@ -4,14 +4,11 @@ import CustomInput from "../customInput/CustomInput";
 import CustomButton from "../customButton/CustomButton";
 import { useAddCardMutation } from "../../app/service/cards";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { useNavigate } from "react-router-dom";
 
 const AddCardForm = () => {
   const [doAddCard] = useAddCardMutation();
 
   const [error, setError] = useState("");
-
-  const navigate = useNavigate();
 
   const onAddCard = async (data) => {
     try {
@@ -29,7 +26,7 @@ const AddCardForm = () => {
     <Row align="middle" justify="center" style={{ height: "50vh" }}>
       <Card title="Добавьте карту" style={{ width: "30rem" }}>
         <Form onFinish={onAddCard}>
-          <CustomInput placeholder="код" name="code" />
+          <CustomInput placeholder="код" name="code" type="number"/>
           <CustomInput placeholder="дата" name="date" />
           <CustomInput placeholder="cvv" name="cvv" />
 

@@ -16,7 +16,9 @@ const initialState: InitialState = {
 const cardSlice = createSlice({
   name: "card",
   initialState,
-  reducers: {},
+  reducers: {
+    remove: () => initialState
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -50,4 +52,5 @@ const cardSlice = createSlice({
 });
 
 export default cardSlice.reducer;
+export const { remove } = cardSlice.actions;
 export const SelectCard = (state: RootState) => state.card.card;

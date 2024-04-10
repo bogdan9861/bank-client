@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./History.scss";
 
@@ -7,11 +7,10 @@ import profileBlank from "../../assets/images/content/profileBlank.png";
 import { useGetHistoryQuery } from "../../app/service/history";
 import Loader from "../loader/Loader";
 import { useSelector } from "react-redux";
-import { SelectCard } from "../../features/cardSlice";
+import { SelectHistory } from "../../features/HistorySlice";
 
 const History = () => {
   const { data, isLoading } = useGetHistoryQuery();
-  const card = useSelector(SelectCard);
 
   if (isLoading) {
     return <Loader />;

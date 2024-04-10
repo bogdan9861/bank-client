@@ -4,6 +4,7 @@ import { api } from "../service/api";
 
 import auth from "../../features/AuthSlice";
 import card from "../../features/cardSlice";
+import history from "../../features/HistorySlice";
 import { listener } from "../../middleware/auth";
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     [api.reducerPath]: api.reducer,
     auth,
     card,
+    history,
   },
   middleware: (GetDefaultMiddleware) =>
     GetDefaultMiddleware().concat(api.middleware).prepend(listener.middleware),

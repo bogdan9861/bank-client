@@ -45,6 +45,11 @@ const Register = () => {
             name="confirmPassword"
             placeholder="Повторите пароль"
           />
+          <CustomInput
+            name="referal"
+            placeholder="реферальный код (не обязательно)"
+            required={false}
+          />
 
           <CustomButton type="primary" htmlType="submit">
             Зарегистрироваться
