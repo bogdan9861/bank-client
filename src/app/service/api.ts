@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/store";
 
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "https://bank-server-fosb.onrender.com/api";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
