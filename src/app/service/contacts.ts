@@ -21,7 +21,7 @@ export const contactsApi = api.injectEndpoints({
         method: "POST",
       }),
     }),
-    removeContact: builder.mutation<Contact, string>({
+    removeContact: builder.mutation<Contact[], string>({
       query: (id) => ({
         url: `/contacts/remove/${id}`,
         body: id,

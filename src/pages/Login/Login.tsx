@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Space, Row, Card, Typography, Flex } from "antd";
+import { Form, Space, Row, Card, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { Paths } from "../../Paths";
 import CustomInput from "../../components/customInput/CustomInput";
 import CustomButton from "../../components/customButton/CustomButton";
 import PasswordInput from "../../components/passwordInput/PasswordInput";
-import { User } from "@prisma/client";
 import { UserData, useLoginMutation } from "../../app/service/auth";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const Login = () => {
-  const [user, setUser] = useState<User>();
-  const [loginUser, loginUserResult] = useLoginMutation();
+  const [loginUser] = useLoginMutation();
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -23,7 +21,9 @@ const Login = () => {
       await loginUser(data).unwrap();
       navigate("/");
     } catch (e) {
-      if (e.data.message) {
+      console.log(e);
+      
+      if (e?.data?.message) {
         setError(e.data.message);
       } else {
         setError(e);

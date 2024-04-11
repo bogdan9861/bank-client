@@ -18,14 +18,15 @@ const HistorySlice = createSlice({
     remove: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
+    builder
+    .addMatcher(
       historyApi.endpoints.getHistory.matchFulfilled,
       (state, action) => {
         state.history = action.payload;
       }
-    );
+    )
   },
 });
 
 export default HistorySlice.reducer;
-export const SelectHistory = (state: RootState) => state.history;
+export const SelectHistory = (state: RootState) => state.history.history;

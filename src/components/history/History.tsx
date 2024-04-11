@@ -11,6 +11,7 @@ import { SelectHistory } from "../../features/HistorySlice";
 
 const History = () => {
   const { data, isLoading } = useGetHistoryQuery();
+  const history = useSelector(SelectHistory);
 
   if (isLoading) {
     return <Loader />;
@@ -32,8 +33,8 @@ const History = () => {
         </div>
       </div>
       <div className="history__inner">
-        {data?.length > 0 ? (
-          data?.map((history) => {
+        {history.length > 0 ? (
+          history?.map((history) => {
             return (
               <div className="history__item" key={history.id}>
                 <div className="history__profile">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import {
   Contact,
@@ -6,6 +7,7 @@ import {
   useGetContactsQuery,
   useRemoveContactMutation,
 } from "../../app/service/contacts";
+import { SelctContacts } from "../../features/ContactsSlice";
 
 import { Form, Modal, notification } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
@@ -27,6 +29,7 @@ const Contacts = () => {
   const { isLoading, data } = useGetContactsQuery();
   const [doAddContact] = useAddContactMutation();
   const [doRemoveContact] = useRemoveContactMutation();
+  const contacts = useSelector(SelctContacts);
 
   const [api, contextHolder] = notification.useNotification();
 
@@ -112,9 +115,9 @@ const Contacts = () => {
           <UserAddOutlined />
           <span className="contacts__add-text">Add</span>
         </button>
-        {data?.map((el) => {
+        {contacts?.map((el) => {
           return (
-            <div className="contacts__list-wrapper">
+            <div className="contacts__list-wrapper" key={el.id}>
               <li
                 className="contacts__list-item"
                 onClick={() => onContactClick(el)}
