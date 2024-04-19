@@ -4,17 +4,20 @@ import { Divider, Modal, Space } from "antd";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/AuthSlice";
 import { SelectCard } from "../../features/cardSlice";
-import { splitOnSpaces } from "../../utils/splitOnSpaces";
+import { splitOnSymbol } from "../../utils/splitOnSymbol";
 import CustomButton from "../customButton/CustomButton";
 import Loader from "../loader/Loader";
 
 import "../../assets/styles/index.css";
 import "./CardOptions.scss";
 
-import mastercard from "../../assets/images/icons/mastercard.svg";
+import mastercard from "../../assets/images/icons/Mastercard-Logo.png";
+import mir from "../../assets/images/icons/mir.png";
+import visa from "../../assets/images/icons/Visa.png";
+
 import shortArrow from "../../assets/images/icons/short-arrow.svg";
+
 import {
-  useAddCardMutation,
   useGetCardQuery,
   useRemoveCardMutation,
 } from "../../app/service/cards";
@@ -23,26 +26,14 @@ const CardOptions = () => {
   const { isLoading, data } = useGetCardQuery();
   const card = useSelector(SelectCard);
   const user = useSelector(selectUser);
-  const [doAddCard] = useAddCardMutation();
   const [doRemove] = useRemoveCardMutation();
 
-  const [oppenModalAdd, setOppenModalAdd] = useState(false);
   const [oppenModalRemove, setOppenModalRemove] = useState(false);
   const [cvvVisableable, setCvvVisable] = useState(false);
 
   if (isLoading) {
     return <Loader />;
   }
-
-  const onAddCard = async (data) => {
-    console.log(data);
-
-    try {
-      await doAddCard(data).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const removeCard = async () => {
     try {
@@ -51,6 +42,16 @@ const CardOptions = () => {
       window.location.reload();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getCardType = () => {
+    if (card?.code[0] === "4") {
+      return visa;
+    } else if (card?.code[0] === "2") {
+      return mir;
+    } else if (card?.code[0] === "5") {
+      return mastercard;
     }
   };
 
@@ -66,19 +67,19 @@ const CardOptions = () => {
       <div className="cardOptions__card">
         <div className="cardOptions__card-inner">
           <span className="cardOptions__card-name">{user?.name}</span>
-          <img className="cardOptions__card-logo" src={mastercard}></img>
+          <img className="cardOptions__card-logo" src={getCardType()}></img>
         </div>
 
         <div className="cardOptions__card-inner">
           <span className="cardOptions__card-number">
-            {splitOnSpaces(card?.code || "")}
+            {splitOnSymbol(card?.code || "", " ")}
           </span>
           <div className="cardOptions__card-cvv">
             <button
               className="cardOptions__card-cvv__text"
               onClick={() => setCvvVisable(!cvvVisableable)}
             >
-              {(cvvVisableable && card?.cvv) || "cvv"}
+              {(cvvVisableable && card?.cvv) || "cvv"}  
             </button>
           </div>
         </div>

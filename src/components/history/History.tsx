@@ -32,7 +32,7 @@ const History = () => {
           </button>
         </div>
       </div>
-      <div className="history__inner">
+      <ul className="history__inner">
         {history.length > 0 ? (
           history?.map((history) => {
             return (
@@ -61,6 +61,9 @@ const History = () => {
                     <span className="history__price-currency">RUB</span>
                     {history.sum}
                   </p>
+                  <span className="history__profile-reason">
+                    {history.reason}
+                  </span>
                 </div>
               </div>
             );
@@ -68,7 +71,7 @@ const History = () => {
         ) : (
           <p>История транзакий пуста</p>
         )}
-      </div>
+      </ul>
     </div>
   );
 };

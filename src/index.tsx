@@ -13,6 +13,9 @@ import Main from "./pages/Main/Main";
 import { Paths } from "./Paths";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import Contacts from "./pages/Contacts/Contacts";
+import AddCard from "./pages/AddCard/AddCard";
+import Profile from "./pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
   {
     path: Paths.login,
     element: <Login />,
+  },
+  {
+    path: Paths.contacts,
+    element: <Contacts />,
+  },
+  {
+    path: Paths.addCard,
+    element: <AddCard />,
+  },
+  {
+    path: Paths.profile,
+    element: <Profile/>,
   },
 ]);
 

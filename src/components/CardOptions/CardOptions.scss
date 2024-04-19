@@ -39,6 +39,11 @@
     margin: 0 auto 33px auto;
   }
 
+  &__card-logo{
+    max-width: 40px;
+    object-fit: cover;
+  }
+
   // .cardOptions__card-inner
 
   &__card-inner {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { SelectContacts } from "../../features/ContactsSlice";
 
 import {
   Contact,
@@ -7,7 +8,6 @@ import {
   useGetContactsQuery,
   useRemoveContactMutation,
 } from "../../app/service/contacts";
-import { SelctContacts } from "../../features/ContactsSlice";
 
 import { Form, Modal, notification } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
@@ -19,6 +19,8 @@ import CustomButton from "../customButton/CustomButton";
 
 import contactImg from "../../assets/images/icons/contact-img.png";
 import "./Contacts.scss";
+import { Link } from "react-router-dom";
+import { Paths } from "../../Paths";
 
 type Notification = {
   duration: number;
@@ -29,7 +31,7 @@ const Contacts = () => {
   const { isLoading, data } = useGetContactsQuery();
   const [doAddContact] = useAddContactMutation();
   const [doRemoveContact] = useRemoveContactMutation();
-  const contacts = useSelector(SelctContacts);
+  const contacts = useSelector(SelectContacts);
 
   const [api, contextHolder] = notification.useNotification();
 
@@ -105,19 +107,19 @@ const Contacts = () => {
       {contextHolder}
       <div className="contacts__top">
         <span className="contacts__title">Recent Contacts</span>
-        <a className="contacts__link" href="#">
+        <Link className="contacts__link" to={Paths.contacts}>
           All contacts
-        </a>
+        </Link>
       </div>
-
       <ul className="contacts__list">
-        <button className="contacts__add" onClick={() => setOppenCreate(true)}>
-          <UserAddOutlined />
-          <span className="contacts__add-text">Add</span>
-        </button>
-        {contacts?.map((el) => {
+      <button className="contacts__add" onClick={() => setOppenCreate(true)}>
+        <UserAddOutlined />
+        <span className="contacts__add-text">Add</span>
+      </button>
+        {contacts?.map((el, i) => {
+          if (i > 4) return;
           return (
-            <div className="contacts__list-wrapper" key={el.id}>
+            <div className="contacts__list-item__wrapper" key={el.id}>
               <li
                 className="contacts__list-item"
                 onClick={() => onContactClick(el)}
@@ -137,7 +139,6 @@ const Contacts = () => {
           );
         })}
       </ul>
-
       <Modal
         open={oppenSend}
         title={`Перевод для ${currentContact?.name}`}

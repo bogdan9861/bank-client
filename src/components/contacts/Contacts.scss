@@ -60,7 +60,12 @@
     height: 70px;
     border: 1px dashed #000;
     border-radius: 100%;
-    transform: translateY(10%);
+  }
+
+  &__list-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
   }
 
   &__list {
@@ -68,7 +73,7 @@
     gap: 0 55px;
   }
 
-  &__list-wrapper {
+  &__list-item__wrapper {
     position: relative;
 
     &:hover .contacts__list-item__remove {

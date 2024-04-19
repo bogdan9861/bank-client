@@ -56,6 +56,7 @@
 
   &__inner {
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 200px;
     padding-right: 30px;
 
@@ -113,7 +114,8 @@
 
   // .history__profile-from
 
-  &__profile-from {
+  &__profile-from,
+  &__profile-reason {
     font-size: 12px;
   }
 
@@ -141,6 +143,7 @@
   // .history__price
 
   &__price {
+    width: 152px;
   }
 
   // .history__price-text

@@ -12,7 +12,7 @@ const Layout = ({ children }: props) => {
   return (
     <div className="main">
       <Header />
-      <AntdLayout.Content style={{ height: "100%", color: "#fff" }}>
+      <AntdLayout.Content style={{ height: "100%"}}>
         {children}
       </AntdLayout.Content>
     </div>

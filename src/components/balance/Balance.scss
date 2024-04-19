@@ -62,7 +62,7 @@
     }
 
     &:hover {
-      background-color: #6e468f;
+      background-color: #6E468F;
       color: #fff;
       transition: 0.3s all;
     }
@@ -70,6 +70,10 @@
     &:hover .balance__btn-img path {
       fill: #fff;
     }
+  }
+
+  &__btn-ico{
+    margin-left: 5px;
   }
 
   &__btn-wrapper {

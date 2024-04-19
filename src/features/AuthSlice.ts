@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AuthApi } from "../app/service/auth";
 import { RootState } from "../app/store/store";
 
+import { shortcut } from "../utils/shortcut";
+
 interface InitialState {
   user: (User & { token: string }) | null;
   isAuthentificated: boolean;
@@ -12,6 +14,13 @@ const initialState: InitialState = {
   user: null,
   isAuthentificated: false,
 };
+
+const setUser = (payload: User) => {
+  return {
+    ...payload,
+    name: shortcut({str: payload.name, limit: 13}),
+  }
+}
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -33,7 +42,7 @@ const AuthSlice = createSlice({
         }
       )
       .addMatcher(AuthApi.endpoints.current.matchFulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = setUser(action.payload);
         state.isAuthentificated = true;
       });
   },

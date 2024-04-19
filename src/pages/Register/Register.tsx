@@ -20,7 +20,7 @@ const Register = () => {
       const user = await doRegister(data).unwrap();
       localStorage.setItem("token", user.token);
 
-      navigate("/");
+      navigate(Paths.addCard);
     } catch (error) {
       if (error.data.message) {
         setError(error.data.message);

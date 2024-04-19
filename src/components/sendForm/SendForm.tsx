@@ -58,7 +58,7 @@ const SendForm = ({ setModalOppen, phone }: Props) => {
     <Form onFinish={transaction}>
       {contextHolder}
       {phone ? null : <CustomInput placeholder="телефон" name="phoneNumber" />}
-      <CustomInput placeholder="сумма" name="sum" />
+      <CustomInput type="number" placeholder="сумма" name="sum" />
       <CustomInput
         placeholder="причина (не обязательно)"
         name="reason"

@@ -6,6 +6,8 @@ import { selectUser } from "../../features/AuthSlice";
 
 import "./Invite.scss";
 import copy from "../../assets/images/icons/copy.svg";
+import { useCurrentQuery } from "../../app/service/auth";
+import Loader from "../loader/Loader";
 
 type Notification = {
   duration: number;
@@ -13,9 +15,14 @@ type Notification = {
 };
 
 const Invite = () => {
+  const {data, isLoading} = useCurrentQuery();
   const user = useSelector(selectUser);
 
   const [api, contextHolder] = notification.useNotification();
+
+  if (isLoading) {
+    return <Loader/>
+  }
 
   const openNotification = ({ description, duration }: Notification) => {
     api.open({

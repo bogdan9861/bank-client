@@ -75,7 +75,7 @@ const Balance = () => {
               }}
             >
               Send
-              <ArrowUpOutlined />
+              <ArrowUpOutlined className="balance__btn-ico" />
             </button>
           </div>
           <div className="balance__btn-wrapper">
@@ -84,7 +84,7 @@ const Balance = () => {
               onClick={() => setOppenModalTopUp(true)}
             >
               Top Up
-              <PlusOutlined />
+              <PlusOutlined className="balance__btn-ico" />
             </button>
           </div>
         </div>
@@ -104,7 +104,7 @@ const Balance = () => {
         title="Перевод по номеру телефона"
       >
         <Form onFinish={topUp}>
-          <CustomInput placeholder="сумма" name="sum" />
+          <CustomInput type="number" placeholder="сумма" name="sum" />
 
           <CustomButton
             className="custom-andt-btn"
