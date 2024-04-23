@@ -32,7 +32,7 @@ const Main = (props: Props) => {
       navigate(Paths.login);
     }
     
-    if (!isLoading && !(card || data)) {
+    if (!isLoading && !data && !card) {
       navigate(Paths.addCard);
     }
 

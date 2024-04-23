@@ -6,7 +6,7 @@ import { RootState } from "../app/store/store";
 import { shortcut } from "../utils/shortcut";
 
 interface InitialState {
-  user: (User & { token: string }) | null;
+  user: (User & { token: string } & { photo: string }) | null;
   isAuthentificated: boolean;
 }
 
@@ -18,9 +18,9 @@ const initialState: InitialState = {
 const setUser = (payload: User) => {
   return {
     ...payload,
-    name: shortcut({str: payload.name, limit: 13}),
-  }
-}
+    name: shortcut({ str: payload.name, limit: 13 }),
+  };
+};
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -44,7 +44,11 @@ const AuthSlice = createSlice({
       .addMatcher(AuthApi.endpoints.current.matchFulfilled, (state, action) => {
         state.user = setUser(action.payload);
         state.isAuthentificated = true;
-      });
+      })
+      .addMatcher(AuthApi.endpoints.setPhoto.matchFulfilled, (state, action) => {
+        state.user = setUser(action.payload)
+        state.isAuthentificated = true
+      })
   },
 });
 

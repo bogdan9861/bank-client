@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { SelectContacts } from "../../features/ContactsSlice";
 
@@ -9,7 +9,7 @@ import {
   useRemoveContactMutation,
 } from "../../app/service/contacts";
 
-import { Form, Modal, notification } from "antd";
+import { Flex, Form, Modal, notification } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 
 import SendForm from "../sendForm/SendForm";
@@ -17,27 +17,27 @@ import Loader from "../loader/Loader";
 import CustomInput from "../customInput/CustomInput";
 import CustomButton from "../customButton/CustomButton";
 
-import contactImg from "../../assets/images/icons/contact-img.png";
+import noPhoto from "../../assets/images/icons/no-photo.png";
+
 import "./Contacts.scss";
 import { Link } from "react-router-dom";
 import { Paths } from "../../Paths";
+import FileInput from "../fileInput/FileInput";
 
-type Notification = {
-  duration: number;
-  description: string;
-};
+import { Notification } from "../../types/notification";
 
 const Contacts = () => {
   const { isLoading, data } = useGetContactsQuery();
   const [doAddContact] = useAddContactMutation();
   const [doRemoveContact] = useRemoveContactMutation();
-  const contacts = useSelector(SelectContacts);
-
   const [api, contextHolder] = notification.useNotification();
+
+  const contacts = useSelector(SelectContacts);
 
   const [oppenCreate, setOppenCreate] = useState(false);
   const [oppenSend, setOppenSend] = useState(false);
   const [currentContact, setCurrentContact] = useState<Contact>();
+  const [url, setUrl] = useState("");
 
   if (isLoading) {
     return <Loader />;
@@ -53,8 +53,9 @@ const Contacts = () => {
   };
 
   const addContact = async (data) => {
+    console.log({ ...data, url });
     try {
-      await doAddContact(data).unwrap();
+      await doAddContact({ ...data, url }).unwrap();
       openNotification({
         description: "Контакт успешно добавлен",
         duration: 3,
@@ -64,6 +65,11 @@ const Contacts = () => {
       if (error.data.message) {
         openNotification({
           description: error.data.message,
+          duration: 5,
+        });
+      } else if (error.originalStatus === 413) {
+        openNotification({
+          description: "Слишком большой размер изображения",
           duration: 5,
         });
       } else {
@@ -112,10 +118,10 @@ const Contacts = () => {
         </Link>
       </div>
       <ul className="contacts__list">
-      <button className="contacts__add" onClick={() => setOppenCreate(true)}>
-        <UserAddOutlined />
-        <span className="contacts__add-text">Add</span>
-      </button>
+        <button className="contacts__add" onClick={() => setOppenCreate(true)}>
+          <UserAddOutlined />
+          <span className="contacts__add-text">Add</span>
+        </button>
         {contacts?.map((el, i) => {
           if (i > 4) return;
           return (
@@ -125,7 +131,11 @@ const Contacts = () => {
                 onClick={() => onContactClick(el)}
               >
                 <a className="contacts__list-link" href="#">
-                  <img className="contacts__list-img" src={contactImg} alt="" />
+                  <img
+                    className="contacts__list-img"
+                    src={el.photo || noPhoto}
+                    alt=""
+                  />
                   <span className="contacts__list-name">{el.name}</span>
                 </a>
               </li>
@@ -156,6 +166,13 @@ const Contacts = () => {
         onCancel={() => setOppenCreate(false)}
       >
         <Form onFinish={addContact}>
+          <img
+            className="contacts__list-img"
+            style={{ width: "50px", height: "50px", marginBottom: "15px" }}
+            src={url || noPhoto}
+            alt=""
+          />
+          <FileInput setUrl={setUrl} />
           <CustomInput name="name" placeholder="Имя" required={true} />
           <CustomInput
             name="phoneNumber"

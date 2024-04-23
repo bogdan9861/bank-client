@@ -1,8 +1,9 @@
 import { api } from "./api";
 
 export type Contact = {
-  id: string,
+  id: string;
   name: string;
+  url: string;
   phoneNumber: string;
 };
 

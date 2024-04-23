@@ -2,7 +2,7 @@ import { User } from "@prisma/client";
 import { api } from "./api";
 
 export type UserData = Omit<User, "id">;
-type ResponseLoginData = User & { token: string };
+type ResponseLoginData = User & { token: string } & { photo?: string | null };
 
 export const AuthApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -26,10 +26,21 @@ export const AuthApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    setPhoto: builder.mutation<ResponseLoginData, string>({
+      query: (url) => ({
+        url: "/users/photo",
+        body: { url },
+        method: "PUT",
+      }),
+    }),
   }),
 });
 
-export const { useCurrentQuery, useLoginMutation, useRegisterMutation } =
-  AuthApi;
+export const {
+  useCurrentQuery,
+  useLoginMutation,
+  useRegisterMutation,
+  useSetPhotoMutation,
+} = AuthApi;
 
-export const { current, login, register } = AuthApi.endpoints;
+export const { current, login, register, setPhoto } = AuthApi.endpoints;

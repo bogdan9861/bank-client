@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "./History.scss";
 
 import arrow from "../../assets/images/icons/short-arrow.svg";
-import profileBlank from "../../assets/images/content/profileBlank.png";
+import noPhoto from '../../assets/images/icons/no-photo.png';
 import { useGetHistoryQuery } from "../../app/service/history";
 import Loader from "../loader/Loader";
 import { useSelector } from "react-redux";
@@ -40,7 +40,7 @@ const History = () => {
                 <div className="history__profile">
                   <img
                     className="history__profile-img"
-                    src={profileBlank}
+                    src={history?.photo || noPhoto}
                     alt=""
                   />
                   <div className="history__profile-content">

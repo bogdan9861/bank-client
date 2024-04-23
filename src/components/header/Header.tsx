@@ -5,7 +5,7 @@ import { remove } from "../../features/cardSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/images/content/logo.png";
-import profileBlank from "../../assets/images/content/profileBlank.png";
+import noPhoto from '../../assets/images/icons/no-photo.png'
 
 import "./Header.scss";
 import "../../assets/styles/App.css";
@@ -45,7 +45,7 @@ const Header = () => {
               <span className="header__profile-name">{user?.name}</span>
             </p>
             <Link to={Paths.profile}>
-              <img className="header__profile-img" src={profileBlank} alt="" />
+              <img className="header__profile-img" src={user?.photo || noPhoto} alt="" />
             </Link>
           </div>
         </div>

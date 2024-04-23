@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Space, Row, Card, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import CustomButton from "../../components/customButton/CustomButton";
 import PasswordInput from "../../components/passwordInput/PasswordInput";
 import { UserData, useLoginMutation } from "../../app/service/auth";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ErrorBoundary from "antd/es/alert/ErrorBoundary";
 
 const Login = () => {
   const [loginUser] = useLoginMutation();
@@ -22,11 +23,11 @@ const Login = () => {
       navigate("/");
     } catch (e) {
       console.log(e);
-      
+
       if (e?.data?.message) {
         setError(e.data.message);
       } else {
-        setError(e);
+        setError(e.error);
       }
     }
   };
@@ -50,7 +51,9 @@ const Login = () => {
           <Typography.Text>
             Нет аккаунта? <Link to={Paths.register}> Зарегистировать </Link>
           </Typography.Text>
-          <ErrorMessage message={error} />
+          <ErrorBoundary>
+            <ErrorMessage message={error} />
+          </ErrorBoundary>
         </Space>
       </Card>
     </Row>
