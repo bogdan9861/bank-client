@@ -7,6 +7,10 @@ type Transation = {
   reason: string | null;
 };
 
+type TopUp = {
+  sum: string;
+};
+
 export const cardsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCard: builder.query<Card, void>({
@@ -35,7 +39,7 @@ export const cardsApi = api.injectEndpoints({
         method: "PUT",
       }),
     }),
-    topUp: builder.mutation<Card, string>({
+    topUp: builder.mutation<Card, TopUp>({
       query: (sum) => ({
         url: "/cards/topup/",
         body: sum,
@@ -53,4 +57,5 @@ export const {
   useTopUpMutation,
 } = cardsApi;
 
-export const { addCard, getCard, removeCard, topUp, transaction } = cardsApi.endpoints;
+export const { addCard, getCard, removeCard, topUp, transaction } =
+  cardsApi.endpoints;

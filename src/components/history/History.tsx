@@ -1,40 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./History.scss";
 
 import arrow from "../../assets/images/icons/short-arrow.svg";
-import noPhoto from '../../assets/images/icons/no-photo.png';
-import { useGetHistoryQuery } from "../../app/service/history";
+import noPhoto from "../../assets/images/icons/no-photo.png";
+import {
+  History as HistoryType,
+  useGetHistoryQuery,
+} from "../../app/service/history";
 import Loader from "../loader/Loader";
 import { useSelector } from "react-redux";
 import { SelectHistory } from "../../features/HistorySlice";
+import { DateToSum } from "../../utils/DateToSum";
 
 const History = () => {
   const { data, isLoading } = useGetHistoryQuery();
   const history = useSelector(SelectHistory);
+  const [filteredHistory, setFilteredHistory] = useState<HistoryType[]>();
+
+  const [dateValue, setDateValue] = useState("");
+
+  useEffect(() => {
+    setFilteredHistory(history);
+  }, [history]);
 
   if (isLoading) {
     return <Loader />;
   }
 
+  const onGetDate = () => {
+    const day = +dateValue.split("-")[0];
+    const month = +dateValue.split("-")[1];
+    const year = +dateValue.split("-")[2];
+    const filterDateSum = dateValue === '' ? 0 : day + month + year;
+
+    const newArr = history.filter((el) => DateToSum(el.date) >= filterDateSum);
+
+    setFilteredHistory(newArr);
+  };
+
   return (
     <div className="history">
       <div className="history__top">
         <span className="history__title">Transactions History</span>
-        <div className="history__filter">
+        <form className="history__filter" onSubmit={(e) => e.preventDefault()}>
           <input
             className="history__filter-input"
             type="date"
             placeholder="Select Date Range"
+            onChange={(e) => setDateValue(e.target.value)}
           />
-          <button className="history__filter-btn">
+          <button className="history__filter-btn" onClick={onGetDate}>
             <img src={arrow} alt="" />
           </button>
-        </div>
+        </form>
       </div>
       <ul className="history__inner">
-        {history.length > 0 ? (
-          history?.map((history) => {
+        {filteredHistory?.length > 0 ? (
+          filteredHistory?.map((history) => {
             return (
               <div className="history__item" key={history.id}>
                 <div className="history__profile">

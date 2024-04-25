@@ -8,8 +8,6 @@ listener.startListening({
   effect: async (action, listenerApi) => {
     listenerApi.cancelActiveListeners();
 
-    console.log(action.payload);
-
     if (action.payload.token) {
       localStorage.setItem("token", action.payload.token);
     }

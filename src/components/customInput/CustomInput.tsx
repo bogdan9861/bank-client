@@ -80,7 +80,21 @@ const CustomInput = ({
               return Promise.resolve();
             }
 
+            if (name === "reason") {
+              if (value.length > 20) {
+                return Promise.reject(
+                  new Error("Максимальная длинна строки 20 символов")
+                );
+              }
+
+              return Promise.resolve();
+            }
+
             if (name === "phoneNumber") {
+              if (value[0] !== "+") {
+                return Promise.reject(new Error("Не верный формат номера"));
+              }
+
               if (value.length < 12 || value.length > 12) {
                 return Promise.reject(
                   new Error("Длинна номера должен быть 11 цифр")
